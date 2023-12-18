@@ -80,8 +80,8 @@ func (t *Template) Register(ctx context.Context, funcs template.FuncMap, partial
 }
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	// _, span := trace.TraceFunction(c.Request().Context(), tracer)
-	// defer span.End()
+	_, span := trace.TraceFunction(c.Request().Context(), tracer)
+	defer span.End()
 
 	t.mutex.RLock()
 	defer t.mutex.RUnlock()
